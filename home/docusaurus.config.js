@@ -6,6 +6,24 @@ const branch = 'master'
 const repoUrl = `https://github.com/dromara/${projectName}`
 const cdnUrl = 'https://cdn.jsdelivr.net/gh/dromara/hertzbeat@gh-pages/'
 
+const i18next = 'i18next'
+const LanguageDetector = 'i18next-browser-languagedetector'
+global.navigator = { userAgent: 'node.js' }
+
+function autoRedircet() {
+  console.log(i18next.language)
+  var lang = global.navigator.language || navigator.userLanguage
+  console.log(lang)
+  console.log('根据用户浏览器当前语言，网站自动跳转环境')
+  if (lang == 'zh-cn') {
+    console.log('中文')
+    return 'zh-cn'
+  } else {
+    console.log('英文')
+    return 'en'
+  }
+}
+
 module.exports = {
   title: 'HertzBeat',
   tagline: '易用友好的实时监控系统',
@@ -21,7 +39,8 @@ module.exports = {
     cdnUrl,
   },
   i18n: {
-    defaultLocale: 'zh-cn',
+    //defaultLocale: 'zh-cn',
+    defaultLocale: autoRedircet(),
     locales: ['zh-cn', 'en'],
   },
   themeConfig: {
